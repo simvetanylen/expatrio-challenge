@@ -1,4 +1,9 @@
 
+# Notes
+* I have never used Jooq, so maybe good practices are not well fulfilled.
+* I follow some hexagonal & DDD principles, so domain doesn't relly on infrastructure or on jooq.
+* For simplicity, I cast UUID to String.
+
 # Setup
 
 ## Postgresql
