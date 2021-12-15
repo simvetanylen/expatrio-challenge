@@ -25,6 +25,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.postgresql:postgresql:42.3.1")
+    implementation("com.auth0:java-jwt:3.18.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     jooqGenerator("org.postgresql:postgresql:42.3.1")
 }

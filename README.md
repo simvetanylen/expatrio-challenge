@@ -27,3 +27,15 @@ psql --host=127.0.0.1 --port=5432 --username=postgres
 ```
 ./gradlew generateJooq  
 ```
+
+# Usage
+
+## Password
+
+An admin user is created :
+```
+email=admin@exemple.com
+password=password
+```
+
+The creation is made on App.kt if no admin user exists.

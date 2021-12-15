@@ -17,7 +17,7 @@ class JooqCustomerRepository(
     override fun findAll(): List<Customer> {
         val record = jooq.fetch(
             AppUser.APP_USER,
-            AppUser.APP_USER.ROLE.eq(Role.CUSTOMER.name)
+            AppUser.APP_USER.ROLE.eq(Role.CUSTOMER)
         )
 
         return record.map {
@@ -47,7 +47,7 @@ class JooqCustomerRepository(
             id = customer.id
             creationTime = LocalDateTime.now()
             updateTime = LocalDateTime.now()
-            role = Role.CUSTOMER.name
+            role = Role.CUSTOMER
             password = customer.password
             firstname = customer.firstname
             lastname = customer.lastname
@@ -64,7 +64,7 @@ class JooqCustomerRepository(
 
         record.apply {
             updateTime = LocalDateTime.now()
-            role = Role.CUSTOMER.name
+            role = Role.CUSTOMER
             password = customer.password
             firstname = customer.firstname
             lastname = customer.lastname
@@ -85,7 +85,7 @@ class JooqCustomerRepository(
         return if (record.isPresent) {
             val user = record.get()
 
-            if (user.role != Role.CUSTOMER.name) {
+            if (user.role != Role.CUSTOMER) {
                 // TODO : what to do in this case ?
                 throw Exception("Not a customer.")
             }

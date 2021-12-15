@@ -1,6 +1,6 @@
 package com.expatrio.challenge.domain
 
-enum class Role {
-    ADMIN,
-    CUSTOMER
+object Role {
+    const val ADMIN = "ROLE_ADMIN"
+    const val CUSTOMER = "ROLE_CUSTOMER"
 }

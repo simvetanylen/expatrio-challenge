@@ -5,4 +5,6 @@ interface UserRepository {
     fun create(user: User): User
     fun delete(id: String): Boolean
     fun update(user: User): User
+    fun findByEmail(email: String): User?
+    fun findAllByRole(role: String): List<User>
 }

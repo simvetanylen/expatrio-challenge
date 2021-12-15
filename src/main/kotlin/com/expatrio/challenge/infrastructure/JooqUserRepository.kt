@@ -1,21 +1,35 @@
 package com.expatrio.challenge.infrastructure
 
-import com.expatrio.challenge.domain.Role
 import com.expatrio.challenge.domain.User
 import com.expatrio.challenge.domain.UserRepository
 import com.expatrio.challenge.generated.jooq.tables.AppUser.APP_USER
 import com.expatrio.challenge.generated.jooq.tables.records.AppUserRecord
 import org.jooq.DSLContext
-import org.jooq.Result
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
-import java.util.*
-
 
 @Repository
 class JooqUserRepository(
     private val jooq: DSLContext
 ) : UserRepository {
+
+    override fun findByEmail(email: String): User? {
+        val record = jooq.fetchOptional(APP_USER, APP_USER.EMAIL.eq(email))
+
+        return if (record.isPresent) {
+            record.get().toDomain()
+        } else {
+            null
+        }
+    }
+
+    override fun findAllByRole(role: String): List<User> {
+        val record = jooq.fetch(APP_USER, APP_USER.ROLE.eq(role))
+
+        return record.map {
+            it.toDomain()
+        }
+    }
 
     override fun findById(id: String): User? {
         return fetchById(id)?.toDomain()
@@ -39,7 +53,7 @@ class JooqUserRepository(
             id = user.id
             creationTime = LocalDateTime.now()
             updateTime = LocalDateTime.now()
-            role = user.role.name
+            role = user.role
             password = user.password
             firstname = user.firstname
             lastname = user.lastname
@@ -56,7 +70,7 @@ class JooqUserRepository(
 
         record.apply {
             updateTime = LocalDateTime.now()
-            role = user.role.name
+            role = user.role
             password = user.password
             firstname = user.firstname
             lastname = user.lastname
@@ -81,7 +95,7 @@ class JooqUserRepository(
     private fun AppUserRecord.toDomain(): User {
         return User(
             id = this.id,
-            role = Role.valueOf(this.role),
+            role = this.role,
             password = this.password,
             firstname = this.firstname,
             lastname = this.lastname,

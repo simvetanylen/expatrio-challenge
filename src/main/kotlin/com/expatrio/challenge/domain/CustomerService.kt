@@ -1,5 +1,7 @@
 package com.expatrio.challenge.domain
 
+import com.expatrio.challenge.domain.exception.NotFoundException
+import org.springframework.security.access.annotation.Secured
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -15,16 +17,19 @@ class CustomerService(
     }
 
     @Transactional(readOnly = true)
+    @Secured(Role.ADMIN)
     fun getAll(): List<Customer> {
         return customerRepository.findAll()
     }
 
     @Transactional(readOnly = true)
+    @Secured(Role.ADMIN)
     fun get(id: String): Customer {
         return customerRepository.findById(id) ?: throw NotFoundException()
     }
 
     @Transactional
+    @Secured(Role.ADMIN)
     fun create(
         firstname: String,
         lastname: String,
@@ -45,6 +50,7 @@ class CustomerService(
     }
 
     @Transactional
+    @Secured(Role.ADMIN)
     fun update(
         id: String,
         firstname: String,
@@ -63,6 +69,7 @@ class CustomerService(
     }
 
     @Transactional
+    @Secured(Role.ADMIN)
     fun delete(id: String) {
         customerRepository.delete(id)
     }
