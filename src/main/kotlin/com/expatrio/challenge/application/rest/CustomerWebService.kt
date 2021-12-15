@@ -62,6 +62,7 @@ class CustomerWebService(
     }
 
     @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: UUID) {
         return customerService.delete(id)
     }

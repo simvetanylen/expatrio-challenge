@@ -101,6 +101,6 @@ class CustomerWebServiceTests(
             String::class.java
         )
 
-        assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        assertThat(entity.statusCode).isEqualTo(HttpStatus.NO_CONTENT)
     }
 }
