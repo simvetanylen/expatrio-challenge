@@ -1,8 +1,10 @@
 package com.expatrio.challenge.domain
 
+import java.util.*
+
 data class Subject(
     val authenticated: Boolean,
-    val id: String?,
+    val id: UUID?,
     val role: String?
 ) {
     init {

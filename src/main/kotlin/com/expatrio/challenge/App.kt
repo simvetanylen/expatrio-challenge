@@ -23,7 +23,6 @@ class App(
 
         if (adminCount == 0) {
             val baseAdmin = User(
-                id = UUID.randomUUID().toString(),
                 firstname = "test",
                 lastname = "test",
                 role = Role.ADMIN,

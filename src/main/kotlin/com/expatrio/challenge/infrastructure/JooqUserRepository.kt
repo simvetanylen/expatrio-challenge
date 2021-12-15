@@ -7,6 +7,7 @@ import com.expatrio.challenge.generated.jooq.tables.records.AppUserRecord
 import org.jooq.DSLContext
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
+import java.util.*
 
 @Repository
 class JooqUserRepository(
@@ -35,7 +36,7 @@ class JooqUserRepository(
         val record = jooq.newRecord(APP_USER)
 
         record.apply {
-            id = user.id
+            id = user.id.toString()
             creationTime = LocalDateTime.now()
             updateTime = LocalDateTime.now()
             role = user.role
@@ -52,7 +53,7 @@ class JooqUserRepository(
 
     private fun AppUserRecord.toDomain(): User {
         return User(
-            id = this.id,
+            id = UUID.fromString(this.id),
             role = this.role,
             encryptedPassword = this.password,
             firstname = this.firstname,

@@ -12,6 +12,7 @@
 # Improvements that could be made
 * Change http status code from 500 to 400 on customer creation if email already exists.
 * Cleanup H2 database between each tests.
+* More tests could be made.
 
 # Setup
 

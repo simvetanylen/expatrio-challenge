@@ -43,7 +43,7 @@ class JwtEncoder(
 
             return Subject(
                 authenticated = authenticated,
-                id = id,
+                id = UUID.fromString(id),
                 role = role
             )
         } catch (t: Throwable) {
@@ -64,7 +64,7 @@ class JwtEncoder(
                 )
             )
             .withClaim(AUTHENTICATED_LABEL, subject.authenticated)
-            .withClaim(ID_LABEL, subject.id)
+            .withClaim(ID_LABEL, subject.id?.toString())
             .withClaim(ROLE_LABEL, subject.role)
             .sign(algorithm)
     }

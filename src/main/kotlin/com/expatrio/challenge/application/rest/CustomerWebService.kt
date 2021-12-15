@@ -25,7 +25,7 @@ class CustomerWebService(
 
     @GetMapping("{id}")
     fun getById(@PathVariable id: UUID): CustomerDto {
-        return customerService.get(id.toString()).toDto()
+        return customerService.get(id).toDto()
     }
 
     @PostMapping
@@ -42,7 +42,7 @@ class CustomerWebService(
     @PutMapping("{id}")
     fun update(@PathVariable id: UUID, @RequestBody @Valid dto: UpdateCustomerDto): CustomerDto {
         return customerService.update(
-            id = id.toString(),
+            id = id,
             firstname = dto.firstname,
             lastname = dto.lastname,
             description = dto.description
@@ -51,7 +51,7 @@ class CustomerWebService(
 
     @DeleteMapping("{id}")
     fun delete(@PathVariable id: UUID) {
-        return customerService.delete(id.toString())
+        return customerService.delete(id)
     }
 
     private fun Customer.toDto(): CustomerDto {

@@ -19,7 +19,7 @@ class CustomerService(
 
     @Transactional(readOnly = true)
     @Secured(Role.ADMIN)
-    fun get(id: String): Customer {
+    fun get(id: UUID): Customer {
         return customerRepository.findById(id) ?: throw NotFoundException()
     }
 
@@ -33,7 +33,6 @@ class CustomerService(
     ): Customer {
         return customerRepository.create(
             Customer(
-                id = UUID.randomUUID().toString(),
                 firstname = firstname,
                 lastname = lastname,
                 email = email,
@@ -45,7 +44,7 @@ class CustomerService(
     @Transactional
     @Secured(Role.ADMIN)
     fun update(
-        id: String,
+        id: UUID,
         firstname: String,
         lastname: String,
         description: String?
@@ -61,7 +60,7 @@ class CustomerService(
 
     @Transactional
     @Secured(Role.ADMIN)
-    fun delete(id: String) {
+    fun delete(id: UUID) {
         customerRepository.delete(id)
     }
 }

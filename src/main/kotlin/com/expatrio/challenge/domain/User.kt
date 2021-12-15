@@ -3,9 +3,10 @@ package com.expatrio.challenge.domain
 import com.expatrio.challenge.domain.exception.BadRequestException
 import com.expatrio.challenge.domain.exception.ForbiddenException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import java.util.*
 
 data class User(
-    val id: String,
+    val id: UUID = UUID.randomUUID(),
     val role: String,
     var encryptedPassword: String? = null,
     val firstname: String,

@@ -32,7 +32,7 @@ class SubjectAuthentication(
     }
 
     override fun getPrincipal(): String? {
-        return subject.id
+        return subject.id?.toString()
     }
 
     override fun isAuthenticated(): Boolean {

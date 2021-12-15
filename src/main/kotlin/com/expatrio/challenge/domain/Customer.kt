@@ -1,7 +1,9 @@
 package com.expatrio.challenge.domain
 
+import java.util.*
+
 data class Customer(
-    val id: String,
+    val id: UUID = UUID.randomUUID(),
     var firstname: String,
     var lastname: String,
     val email: String,

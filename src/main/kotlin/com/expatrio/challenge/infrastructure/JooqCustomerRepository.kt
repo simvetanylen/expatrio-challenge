@@ -8,6 +8,7 @@ import com.expatrio.challenge.generated.jooq.tables.records.AppUserRecord
 import org.jooq.DSLContext
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
+import java.util.*
 
 @Repository
 class JooqCustomerRepository(
@@ -25,11 +26,11 @@ class JooqCustomerRepository(
         }
     }
 
-    override fun findById(id: String): Customer? {
+    override fun findById(id: UUID): Customer? {
         return fetchById(id)?.toDomain()
     }
 
-    override fun delete(id: String): Boolean {
+    override fun delete(id: UUID): Boolean {
         val record = fetchById(id)
 
         return if (record != null) {
@@ -44,7 +45,7 @@ class JooqCustomerRepository(
         val record = jooq.newRecord(AppUser.APP_USER)
 
         record.apply {
-            id = customer.id
+            id = customer.id.toString()
             creationTime = LocalDateTime.now()
             updateTime = LocalDateTime.now()
             role = Role.CUSTOMER
@@ -74,10 +75,10 @@ class JooqCustomerRepository(
         return record.toDomain()
     }
 
-    private fun fetchById(id: String): AppUserRecord? {
+    private fun fetchById(id: UUID): AppUserRecord? {
         val record = jooq.fetchOptional(
             AppUser.APP_USER,
-            AppUser.APP_USER.ID.eq(id)
+            AppUser.APP_USER.ID.eq(id.toString())
         )
 
         return if (record.isPresent) {
@@ -96,7 +97,7 @@ class JooqCustomerRepository(
 
     private fun AppUserRecord.toDomain(): Customer {
         return Customer(
-            id = this.id,
+            id = UUID.fromString(this.id),
             firstname = this.firstname,
             lastname = this.lastname,
             email = this.email,
