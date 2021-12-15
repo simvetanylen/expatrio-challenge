@@ -39,7 +39,7 @@ class JooqUserRepository(
             creationTime = LocalDateTime.now()
             updateTime = LocalDateTime.now()
             role = user.role
-            password = user.password
+            password = user.encryptedPassword
             firstname = user.firstname
             lastname = user.lastname
             email = user.email
@@ -54,7 +54,7 @@ class JooqUserRepository(
         return User(
             id = this.id,
             role = this.role,
-            password = this.password,
+            encryptedPassword = this.password,
             firstname = this.firstname,
             lastname = this.lastname,
             email = this.email,

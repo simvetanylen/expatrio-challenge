@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 data class User(
     val id: String,
     val role: String,
-    val password: String,
+    var encryptedPassword: String? = null,
     val firstname: String,
     val lastname: String,
     val email: String,
@@ -17,8 +17,12 @@ data class User(
         private val PASSWORD_ENCODER = BCryptPasswordEncoder()
     }
 
+    fun changePassword(newPassword: String) {
+        encryptedPassword = PASSWORD_ENCODER.encode(newPassword)
+    }
+
     fun verifyPassword(submittedPassword: String) {
-        val matches = PASSWORD_ENCODER.matches(submittedPassword, password)
+        val matches = PASSWORD_ENCODER.matches(submittedPassword, encryptedPassword)
 
         if (!matches) {
             throw BadRequestException()

@@ -7,6 +7,7 @@
 * On login, a cookie with the JWT is sent back. This cookie is expected to be set in request header : Authorization: Bearer [TOKEN].
 * H2 database is used for testing. End to end approach is used.
 * Some validations are made with spring-validation.
+* Since the password is never used for customers, I choose to not put it in the corresponding object.
 
 # Improvements that could be made
 * Change http status code from 500 to 400 on customer creation if email already exists.

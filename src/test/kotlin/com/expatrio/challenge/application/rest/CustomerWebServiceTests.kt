@@ -74,7 +74,6 @@ class CustomerWebServiceTests(
                 UpdateCustomerDto(
                     firstname = "test2",
                     lastname = "test2",
-                    password = "new password",
                     description = "new description"
                 ),
                 headers

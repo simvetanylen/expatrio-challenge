@@ -10,9 +10,6 @@ data class CreateCustomerDto(
     @field:Size(min = 3, max = 32)
     val lastname: String,
 
-    @field:Size(min = 8, max = 32)
-    val password: String,
-
     @field:Email
     val email: String,
 

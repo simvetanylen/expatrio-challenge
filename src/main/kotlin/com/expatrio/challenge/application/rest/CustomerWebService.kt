@@ -35,7 +35,6 @@ class CustomerWebService(
             firstname = dto.firstname,
             lastname = dto.lastname,
             email = dto.email,
-            password = dto.password,
             description = dto.description
         ).toDto()
     }
@@ -46,7 +45,6 @@ class CustomerWebService(
             id = id.toString(),
             firstname = dto.firstname,
             lastname = dto.lastname,
-            password = dto.password,
             description = dto.description
         ).toDto()
     }

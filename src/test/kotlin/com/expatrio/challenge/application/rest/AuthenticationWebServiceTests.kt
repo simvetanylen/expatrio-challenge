@@ -58,9 +58,9 @@ class AuthenticationWebServiceTests(
     }
 
     @Test
-    fun `Login with a customer should return a 403`() {
+    fun `Login with a customer should return a 400`() {
         val headers = restTemplate.loginAndGetHeaders()
-        restTemplate.createCustomer(createCustomerDto().copy(email = "customer@exemple.com", password = "password"), headers)
+        restTemplate.createCustomer(createCustomerDto().copy(email = "customer@exemple.com"), headers)
 
         val entity = restTemplate.postForEntity(
             URI("/auth/login"),
@@ -70,6 +70,6 @@ class AuthenticationWebServiceTests(
             ),
             Any::class.java
         )
-        assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
+        assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 }

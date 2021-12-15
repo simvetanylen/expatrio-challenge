@@ -48,7 +48,6 @@ class JooqCustomerRepository(
             creationTime = LocalDateTime.now()
             updateTime = LocalDateTime.now()
             role = Role.CUSTOMER
-            password = customer.password
             firstname = customer.firstname
             lastname = customer.lastname
             email = customer.email
@@ -65,7 +64,6 @@ class JooqCustomerRepository(
         record.apply {
             updateTime = LocalDateTime.now()
             role = Role.CUSTOMER
-            password = customer.password
             firstname = customer.firstname
             lastname = customer.lastname
             email = customer.email
@@ -99,7 +97,6 @@ class JooqCustomerRepository(
     private fun AppUserRecord.toDomain(): Customer {
         return Customer(
             id = this.id,
-            password = this.password,
             firstname = this.firstname,
             lastname = this.lastname,
             email = this.email,

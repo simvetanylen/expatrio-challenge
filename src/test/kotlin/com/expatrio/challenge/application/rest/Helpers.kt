@@ -55,6 +55,5 @@ fun createCustomerDto() = CreateCustomerDto(
     email = "${UUID.randomUUID()}@exemple.com",
     firstname = "test",
     lastname = "test",
-    password = "password",
     description = "test"
 )
