@@ -8,6 +8,7 @@
 * H2 database is used for testing. End to end approach is used.
 * Some validations are made with spring-validation.
 * Since the password is never used for customers, I choose to not put it in the corresponding object.
+* Pagination is implemented. Pages starts from 0.
 
 # Improvements that could be made
 * Change http status code from 500 to 400 on customer creation if email already exists.

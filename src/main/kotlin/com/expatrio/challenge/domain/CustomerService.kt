@@ -13,8 +13,8 @@ class CustomerService(
 
     @Transactional(readOnly = true)
     @Secured(Role.ADMIN)
-    fun getAll(): List<Customer> {
-        return customerRepository.findAll()
+    fun getAll(size: Int, pageNumber: Int): Page<Customer> {
+        return customerRepository.findAll(size = size, pageNumber = pageNumber)
     }
 
     @Transactional(readOnly = true)

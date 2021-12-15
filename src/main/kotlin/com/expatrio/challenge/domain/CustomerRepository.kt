@@ -7,5 +7,5 @@ interface CustomerRepository {
     fun delete(id: UUID): Boolean
     fun create(customer: Customer): Customer
     fun update(customer: Customer): Customer
-    fun findAll(): List<Customer>
+    fun findAll(size: Int, pageNumber: Int): Page<Customer>
 }

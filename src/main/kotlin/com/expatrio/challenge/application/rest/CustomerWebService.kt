@@ -2,9 +2,11 @@ package com.expatrio.challenge.application.rest
 
 import com.expatrio.challenge.application.rest.dto.CreateCustomerDto
 import com.expatrio.challenge.application.rest.dto.CustomerDto
+import com.expatrio.challenge.application.rest.dto.PageDto
 import com.expatrio.challenge.application.rest.dto.UpdateCustomerDto
 import com.expatrio.challenge.domain.Customer
 import com.expatrio.challenge.domain.CustomerService
+import com.expatrio.challenge.domain.exception.BadRequestException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -17,10 +19,20 @@ class CustomerWebService(
 ) {
 
     @GetMapping
-    fun getAll(): List<CustomerDto> {
-        return customerService.getAll().map {
-            it.toDto()
-        }
+    fun getAll(
+        @RequestParam(name = "size", defaultValue = "10") size: Int,
+        @RequestParam(name = "pageNumber", defaultValue = "0") pageNumber: Int
+    ): PageDto<CustomerDto> {
+        if (size < 1) { throw BadRequestException() }
+        if (pageNumber < 0) { throw BadRequestException() }
+
+        val customers = customerService.getAll(size = size, pageNumber = pageNumber)
+
+        return PageDto(
+            pageNumber = customers.pageNumber,
+            size = customers.size,
+            items = customers.items.map { it.toDto() }
+        )
     }
 
     @GetMapping("{id}")

@@ -2,6 +2,7 @@ package com.expatrio.challenge.infrastructure
 
 import com.expatrio.challenge.domain.Customer
 import com.expatrio.challenge.domain.CustomerRepository
+import com.expatrio.challenge.domain.Page
 import com.expatrio.challenge.domain.Role
 import com.expatrio.challenge.generated.jooq.tables.AppUser
 import com.expatrio.challenge.generated.jooq.tables.records.AppUserRecord
@@ -9,21 +10,28 @@ import org.jooq.DSLContext
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.math.max
 
 @Repository
 class JooqCustomerRepository(
     private val jooq: DSLContext
 ) : CustomerRepository {
 
-    override fun findAll(): List<Customer> {
-        val record = jooq.fetch(
-            AppUser.APP_USER,
-            AppUser.APP_USER.ROLE.eq(Role.CUSTOMER)
-        )
+    override fun findAll(size: Int, pageNumber: Int): Page<Customer> {
+        val record = jooq.selectFrom(AppUser.APP_USER)
+            .where(AppUser.APP_USER.ROLE.eq(Role.CUSTOMER))
+            .orderBy(AppUser.APP_USER.CREATION_TIME)
+            .offset(max(size, 0) * max(pageNumber, 0))
+            .limit(size)
+            .fetch()
 
-        return record.map {
-            it.toDomain()
-        }
+        return Page(
+            pageNumber = pageNumber,
+            size = size,
+            items = record.map {
+                it.toDomain()
+            }
+        )
     }
 
     override fun findById(id: UUID): Customer? {
