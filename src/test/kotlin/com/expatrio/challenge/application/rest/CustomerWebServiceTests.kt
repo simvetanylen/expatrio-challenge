@@ -1,6 +1,5 @@
 package com.expatrio.challenge.application.rest
 
-import com.expatrio.challenge.application.rest.dto.CreateCustomerDto
 import com.expatrio.challenge.application.rest.dto.CustomerDto
 import com.expatrio.challenge.application.rest.dto.UpdateCustomerDto
 import org.assertj.core.api.Assertions.assertThat
@@ -13,7 +12,6 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.ActiveProfiles
 import java.net.URI
-import java.util.*
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")

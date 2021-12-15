@@ -3,15 +3,12 @@ package com.expatrio.challenge.application.rest
 import com.expatrio.challenge.application.rest.dto.LoginDto
 import com.expatrio.challenge.application.security.JwtEncoder
 import com.expatrio.challenge.domain.AuthenticationService
-import com.expatrio.challenge.domain.Role
-import com.expatrio.challenge.domain.Subject
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
 import javax.validation.Valid
 
 @RestController

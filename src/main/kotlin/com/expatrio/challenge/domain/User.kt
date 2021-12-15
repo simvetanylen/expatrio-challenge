@@ -2,7 +2,6 @@ package com.expatrio.challenge.domain
 
 import com.expatrio.challenge.domain.exception.BadRequestException
 import com.expatrio.challenge.domain.exception.ForbiddenException
-import com.expatrio.challenge.domain.exception.UnauthorizedException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 data class User(

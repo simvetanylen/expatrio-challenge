@@ -31,21 +31,6 @@ class JooqUserRepository(
         }
     }
 
-    override fun findById(id: String): User? {
-        return fetchById(id)?.toDomain()
-    }
-
-    override fun delete(id: String): Boolean {
-        val record = fetchById(id)
-
-        return if (record != null) {
-            record.delete()
-            true
-        } else {
-            false
-        }
-    }
-
     override fun create(user: User): User {
         val record = jooq.newRecord(APP_USER)
 
@@ -63,33 +48,6 @@ class JooqUserRepository(
 
         record.store()
         return record.toDomain()
-    }
-
-    override fun update(user: User): User {
-        val record = fetchById(user.id) ?: throw Exception("User not found.")
-
-        record.apply {
-            updateTime = LocalDateTime.now()
-            role = user.role
-            password = user.password
-            firstname = user.firstname
-            lastname = user.lastname
-            email = user.email
-            description = user.description
-        }
-
-        record.store()
-        return record.toDomain()
-    }
-
-    private fun fetchById(id: String): AppUserRecord? {
-        val record = jooq.fetchOptional(APP_USER, APP_USER.ID.eq(id))
-
-        return if (record.isPresent) {
-            record.get()
-        } else {
-            null
-        }
     }
 
     private fun AppUserRecord.toDomain(): User {
