@@ -1,6 +1,8 @@
 package com.expatrio.challenge.application.rest
 
+import com.expatrio.challenge.application.rest.dto.LoginDto
 import com.expatrio.challenge.application.security.JwtEncoder
+import com.expatrio.challenge.domain.AuthenticationService
 import com.expatrio.challenge.domain.Role
 import com.expatrio.challenge.domain.Subject
 import org.springframework.beans.factory.annotation.Value
@@ -16,18 +18,14 @@ import java.util.*
 class AuthenticationWebService(
     @Value("\${jwt.durationInMinutes}") tokenDurationInMinutes: Long,
     private val jwtEncoder: JwtEncoder,
+    private val authenticationService: AuthenticationService
 ) {
 
     private val maxAge: Long = tokenDurationInMinutes * 60
 
     @PostMapping("login")
     fun login(@RequestBody dto: LoginDto): ResponseEntity<Void> {
-        val subject = Subject(
-            id = UUID.randomUUID().toString(),
-            role = Role.ADMIN,
-            authenticated = true
-        )
-
+        val subject = authenticationService.login(email = dto.email, password = dto.password)
         val token = jwtEncoder.encode(subject)
 
         return ResponseEntity.ok()

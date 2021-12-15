@@ -1,9 +1,9 @@
-package com.expatrio.challenge.application.rest
+package com.expatrio.challenge.application.rest.dto
 
-data class CreateCustomerDto(
+data class CustomerDto(
+    val id: String,
     val firstname: String,
     val lastname: String,
-    val password: String,
     val email: String,
     val description: String?
 )

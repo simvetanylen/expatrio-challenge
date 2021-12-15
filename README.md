@@ -3,6 +3,8 @@
 * I have never used Jooq, so maybe good practices are not well fulfilled.
 * I follow some hexagonal & DDD principles, so domain doesn't relly on infrastructure or on jooq.
 * For simplicity, I cast UUID to String.
+* Password are encrypted with bcrypt.
+* On login, a cookie with the JWT is sent back. This cookie is expected to be set in request header : Authorization: Bearer [TOKEN].
 
 # Setup
 

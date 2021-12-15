@@ -1,5 +1,8 @@
 package com.expatrio.challenge.application.rest
 
+import com.expatrio.challenge.application.rest.dto.CreateCustomerDto
+import com.expatrio.challenge.application.rest.dto.CustomerDto
+import com.expatrio.challenge.application.rest.dto.UpdateCustomerDto
 import com.expatrio.challenge.domain.Customer
 import com.expatrio.challenge.domain.CustomerService
 import org.springframework.web.bind.annotation.*
