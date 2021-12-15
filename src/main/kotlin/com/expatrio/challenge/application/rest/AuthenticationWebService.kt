@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("auth")
@@ -24,7 +25,7 @@ class AuthenticationWebService(
     private val maxAge: Long = tokenDurationInMinutes * 60
 
     @PostMapping("login")
-    fun login(@RequestBody dto: LoginDto): ResponseEntity<Void> {
+    fun login(@RequestBody @Valid dto: LoginDto): ResponseEntity<Void> {
         val subject = authenticationService.login(email = dto.email, password = dto.password)
         val token = jwtEncoder.encode(subject)
 

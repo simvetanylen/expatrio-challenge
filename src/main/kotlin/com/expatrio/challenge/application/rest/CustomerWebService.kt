@@ -5,8 +5,10 @@ import com.expatrio.challenge.application.rest.dto.CustomerDto
 import com.expatrio.challenge.application.rest.dto.UpdateCustomerDto
 import com.expatrio.challenge.domain.Customer
 import com.expatrio.challenge.domain.CustomerService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("customers")
@@ -27,7 +29,8 @@ class CustomerWebService(
     }
 
     @PostMapping
-    fun create(@RequestBody dto: CreateCustomerDto): CustomerDto {
+    @ResponseStatus(HttpStatus.CREATED)
+    fun create(@RequestBody @Valid dto: CreateCustomerDto): CustomerDto {
         return customerService.create(
             firstname = dto.firstname,
             lastname = dto.lastname,
@@ -38,7 +41,7 @@ class CustomerWebService(
     }
 
     @PutMapping("{id}")
-    fun update(@PathVariable id: UUID, @RequestBody dto: UpdateCustomerDto): CustomerDto {
+    fun update(@PathVariable id: UUID, @RequestBody @Valid dto: UpdateCustomerDto): CustomerDto {
         return customerService.update(
             id = id.toString(),
             firstname = dto.firstname,

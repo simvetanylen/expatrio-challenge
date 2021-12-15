@@ -1,0 +1,13 @@
+
+jwt:
+  issuer: expatrio
+  secretKey: my-secret-key
+  durationInMinutes: 60
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;INIT=create schema if not exists public AUTHORIZATION sa;DB_CLOSE_ON_EXIT=FALSE;SCHEMA=public;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jooq.sql-dialect: H2

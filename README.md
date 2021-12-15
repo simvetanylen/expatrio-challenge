@@ -5,6 +5,12 @@
 * For simplicity, I cast UUID to String.
 * Password are encrypted with bcrypt.
 * On login, a cookie with the JWT is sent back. This cookie is expected to be set in request header : Authorization: Bearer [TOKEN].
+* H2 database is used for testing. End to end approach is used.
+* Some validations are made with spring-validation.
+
+# Improvements that could be made
+* Change http status code from 500 to 400 on customer creation if email already exists.
+* Cleanup H2 database between each tests.
 
 # Setup
 

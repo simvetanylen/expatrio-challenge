@@ -22,11 +22,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.postgresql:postgresql:42.3.1")
     implementation("com.auth0:java-jwt:3.18.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("com.h2database:h2")
+    testImplementation("org.flywaydb:flyway-core")
     jooqGenerator("org.postgresql:postgresql:42.3.1")
 }
 
@@ -53,7 +56,7 @@ buildscript {
 jooq {
     configurations {
         create("main") {
-            generateSchemaSourceOnCompilation.set(true)
+            generateSchemaSourceOnCompilation.set(false)
 
             jooqConfiguration.apply {
                 logging = Logging.WARN

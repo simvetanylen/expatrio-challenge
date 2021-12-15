@@ -1,6 +1,8 @@
 package com.expatrio.challenge.domain
 
 import com.expatrio.challenge.domain.exception.BadRequestException
+import com.expatrio.challenge.domain.exception.ForbiddenException
+import com.expatrio.challenge.domain.exception.UnauthorizedException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 data class User(
@@ -17,15 +19,15 @@ data class User(
     }
 
     fun verifyPassword(submittedPassword: String) {
-        if (role != Role.ADMIN) {
-            // If user isn't an admin, he can't log in.
-            throw BadRequestException()
-        }
-
         val matches = PASSWORD_ENCODER.matches(submittedPassword, password)
 
         if (!matches) {
             throw BadRequestException()
+        }
+
+        if (role != Role.ADMIN) {
+            // If user isn't an admin, he can't log in.
+            throw ForbiddenException()
         }
     }
 }
